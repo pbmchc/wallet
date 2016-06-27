@@ -31,6 +31,8 @@ namespace Wallet
     public sealed partial class App : Application
     {
         private TransitionCollection transitions;
+
+        //sqlite database
         public static string DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "VirtualWalletDB.sqlite"));
 
         /// <summary>
