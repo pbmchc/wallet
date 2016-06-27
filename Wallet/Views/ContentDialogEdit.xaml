@@ -1,0 +1,52 @@
+﻿<ContentDialog
+    x:Class="Wallet.Views.ContentDialogEdit"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Wallet.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Title="Edit"
+    PrimaryButtonText="Save"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonText="Cancel" Loaded="ContentDialog_Loaded"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
+    xmlns:converter="using:Wallet.Helpers"
+    >
+    <ContentDialog.Resources>
+        <converter:StringFormatConverter x:Key="ConverterString"></converter:StringFormatConverter>
+    </ContentDialog.Resources>
+    <Grid VerticalAlignment="Stretch">
+        <StackPanel VerticalAlignment="Stretch">
+            <Pivot VerticalAlignment="Stretch" x:Name="pEdit" x:Uid="pEdit">
+                <PivotItem x:Name="pImportant" x:Uid="pImportant">
+                    <PivotItem.Header>
+                        <TextBlock>Important info</TextBlock>
+                    </PivotItem.Header>
+                    <StackPanel>
+                        <TextBlock x:Name="tbType"></TextBlock>
+                        <ComboBox x:Name="cbCategory" Width="auto" PlaceholderText="Choose category">
+                            <ComboBoxItem Name="Home" Content="Home"></ComboBoxItem>
+                            <ComboBoxItem Name="Entertainment" Content="Entertainment"></ComboBoxItem>
+                            <ComboBoxItem Name="Medical" Content="Medical"></ComboBoxItem>
+                            <ComboBoxItem Name="Other" Content="Other"></ComboBoxItem>
+                        </ComboBox>
+                        <TextBox Background="AliceBlue" BorderBrush="LightGray" PlaceholderText="Title..." x:Name="tbTitle" Text="{Binding Title, Mode=TwoWay}"></TextBox>
+                        <TextBox Background="AliceBlue" BorderBrush="LightGray" PlaceholderText="Amount..." x:Name="tbAmount" InputScope="NumberFullWidth" Text="{Binding Amount, Mode=TwoWay, Converter={StaticResource ConverterString}}"></TextBox>
+                        <DatePicker x:Name="dpDate" DateChanged="dpDate_DateChanged" Date="{Binding Date}"></DatePicker>
+                    </StackPanel>
+                </PivotItem>
+                <PivotItem x:Name="pAdditional" x:Uid="pAdditional">
+                    <PivotItem.Header>
+                        <TextBlock>Additional info</TextBlock>
+                    </PivotItem.Header>
+                    <StackPanel>
+                        <TextBox Background="AliceBlue" BorderBrush="LightGray" PlaceholderText="Add comment..." x:Name="tbComment" Text="{Binding Comment, Mode=TwoWay}"></TextBox>
+                    </StackPanel>
+                </PivotItem>
+            </Pivot>
+            <TextBlock TextWrapping="Wrap" x:Name="tbError"></TextBlock>
+        </StackPanel>
+    </Grid>
+</ContentDialog>

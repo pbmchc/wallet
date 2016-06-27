@@ -1,0 +1,67 @@
+﻿<Page
+    x:Class="Wallet.Views.AddTran"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Wallet.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Storyboard x:Name="fadeInStoryboard">
+                <DoubleAnimation Storyboard.TargetName="spAnimate" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1">
+                </DoubleAnimation>
+            </Storyboard>
+        </Grid.Resources>
+        <StackPanel x:Name="spAnimate" Grid.Row="0">
+            <Pivot VerticalAlignment="Stretch" x:Uid="pTransaction" x:Name="pTransaction">
+                <PivotItem x:Uid="pNecessary" x:Name="pNecessary">
+                    <PivotItem.Header>
+                        <TextBlock x:Uid="tbHeader1" x:Name="tbHeader1" Text="General info"></TextBlock>
+                    </PivotItem.Header>
+                    <StackPanel Margin="0 20 0 0">
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton Checked="rbIncome_Checked" x:Name="rbIncome">Income</RadioButton>
+                            <RadioButton x:Name="rbExpense" Checked="rbExpense_Checked">Expense</RadioButton>
+                        </StackPanel>
+                        <TextBlock Visibility="Collapsed" x:Name="tblCategory" Text="Category" Style="{StaticResource BaseTextBlockStyle}"></TextBlock>
+                        <ComboBox x:Name="cbCategory" Width="auto" PlaceholderText="Choose category" Visibility="Collapsed">
+                            <ComboBoxItem Content="Home" IsSelected="True"></ComboBoxItem>
+                            <ComboBoxItem Content="Entertainment"></ComboBoxItem>
+                            <ComboBoxItem Content="Medical"></ComboBoxItem>
+                            <ComboBoxItem Content="Other"></ComboBoxItem>
+                        </ComboBox>
+                        <TextBlock Text="Title" Style="{StaticResource BaseTextBlockStyle}"></TextBlock>
+                        <TextBox x:Name="tbTitle" Background="AliceBlue" BorderBrush="LightGray"></TextBox>
+                        <TextBlock Text="Amount" Style="{StaticResource BaseTextBlockStyle}"></TextBlock>
+                        <TextBox x:Name="tbAmount" InputScope="Number" Background="AliceBlue" BorderBrush="LightGray"></TextBox>
+                        <TextBlock Text="Date" Style="{StaticResource BaseTextBlockStyle}"></TextBlock>
+                        <DatePicker x:Name="dpDate" DateChanged="dpDate_DateChanged"></DatePicker>
+                    </StackPanel>
+                </PivotItem>
+                <PivotItem x:Uid="pAdditional" x:Name="pAdditional">
+                    <PivotItem.Header>
+                        <TextBlock x:Uid="tbHeader2" x:Name="tbHeader2" Text="Additional info"></TextBlock>
+                    </PivotItem.Header>
+                    <StackPanel>
+                        <TextBlock Text="Comment" Style="{StaticResource BaseTextBlockStyle}"></TextBlock>
+                        <TextBox x:Name="tbComment" Background="AliceBlue" BorderBrush="LightGray"></TextBox>
+                        <StackPanel Margin="0 30 0 0">
+                            <Button x:Name="btnPicture" HorizontalAlignment="center" Width="200" Click="btnPicture_Click">Add picture</Button>
+                            <Image Margin="0 20 0 0" x:Name="imgPhoto" Source="{Binding PhotoPath}" Height="200"></Image>
+                        </StackPanel>
+                    </StackPanel>
+                </PivotItem>
+            </Pivot>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <Button VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" x:Name="btnAdd" Click="btnAdd_Click">Add item</Button>
+        </StackPanel>
+    </Grid>
+</Page>

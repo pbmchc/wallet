@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="Wallet.Views.DetailsTran"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Wallet.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:converter="using:Wallet.Helpers">
+    <Page.Resources>
+        <converter:StringFormatConverter x:Key="ConverterString"></converter:StringFormatConverter>
+    </Page.Resources>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton x:Name="btnEdit" Icon="Edit" Label="Edit" Click="btnEdit_Click"></AppBarButton>
+            <AppBarButton x:Name="btnPhoto" Icon="Pictures" Label="Photo" Click="btnPhoto_Click"></AppBarButton>
+            <AppBarButton x:Name="btnDelete" Icon="Delete" Label="Delete" Click="btnDelete_Click"></AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
+    <Grid>
+        <Pivot>
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Text="Details"></TextBlock>
+                </PivotItem.Header>
+                <PivotItem.Resources>
+                    <Storyboard x:Name="fadeInStoryboard">
+                        <DoubleAnimation Storyboard.TargetName="spAnimate" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1">
+                        </DoubleAnimation>
+                    </Storyboard>
+                </PivotItem.Resources>
+                <StackPanel x:Name="spAnimate" Margin="0 20 0 0">
+                    <Image x:Name="imgAnimate" Margin="0 0 0 30" Source="{Binding ImagePath}" Height="60" Width="60"></Image>
+                    <TextBlock Pivot.SlideInAnimationGroup="GroupOne" Text="Category:" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                    <TextBlock Pivot.SlideInAnimationGroup="GroupThree" x:Name="tblCategory" Text="{Binding Category}" Style="{StaticResource BaseTextBlockStyle}" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Pivot.SlideInAnimationGroup="GroupOne" Text="Title:" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                    <TextBlock Pivot.SlideInAnimationGroup="GroupThree" x:Name="tblTitle" Text="{Binding Title}" Style="{StaticResource BaseTextBlockStyle}" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Pivot.SlideInAnimationGroup="GroupOne" Text="Amount:" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                    <TextBlock Pivot.SlideInAnimationGroup="GroupThree" x:Name="tblAmount" Text="{Binding Amount, Converter={StaticResource ConverterString}}" Style="{StaticResource BaseTextBlockStyle}" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Pivot.SlideInAnimationGroup="GroupOne" Text="Date:" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                    <TextBlock Pivot.SlideInAnimationGroup="GroupThree" x:Name="tblDate" Text="{Binding Date}" Style="{StaticResource BaseTextBlockStyle}" HorizontalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </PivotItem>
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Text="Additional info"></TextBlock>
+                </PivotItem.Header>
+                <StackPanel Margin="0 20 0 0">
+                    <TextBlock Pivot.SlideInAnimationGroup="GroupOne" Text="Comment:" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                    <TextBlock Pivot.SlideInAnimationGroup="GroupThree" x:Name="tbComment" Style="{StaticResource BaseTextBlockStyle}" Text="{Binding Comment}"></TextBlock>
+                    <StackPanel Margin="0 20 0 0">
+                        <TextBlock Pivot.SlideInAnimationGroup="GroupOne" Text="Photos:" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                        <Image Pivot.SlideInAnimationGroup="GroupThree" x:Name="imgPhoto" Margin="0 20 0 0" Source="{Binding PhotoPath}" Height="200"></Image>
+                    </StackPanel>
+                </StackPanel>
+            </PivotItem>
+        </Pivot>
+
+    </Grid>
+</Page>
