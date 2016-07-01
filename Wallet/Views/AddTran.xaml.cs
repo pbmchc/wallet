@@ -184,7 +184,15 @@ namespace Wallet.Views
                 }
                 catch (FileNotFoundException)
                 {
+                    try
+                    {
+                        file = await copyFolder.GetFileAsync(storageFile.Name);
+                        await file.DeleteAsync();
+                    }
+                    catch (FileNotFoundException)
+                    {
 
+                    }
                     file = await storageFile.CopyAsync(copyFolder);
                     await file.RenameAsync(file.DisplayName + "PHOTO" + counter);
                 }
